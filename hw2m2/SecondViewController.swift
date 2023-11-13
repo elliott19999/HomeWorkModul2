@@ -45,10 +45,10 @@ class SecondViewController: UIViewController {
     
     lazy var btnActionPlus = UIAction { _ in
         if let textFromFirstTextField = self.textField.text, let textFromSecondTextField = self.textField2.text {
-            if let value1 = Int(textFromFirstTextField), let value2 = Int(textFromSecondTextField) {
+            if let value1 = Float(textFromFirstTextField), let value2 = Float(textFromSecondTextField) {
               
                 let res = value1 + value2
-                self.delegate?.setTextAnalise(number1: "\(value1) +", number2: "\(value2)", result: "=  \(res)")
+                self.delegate?.setTextAnalise(number1: "\(value1)", number2: "\(value2)", operation:"+", result: "=  \(res)")
             }
         }
     }
@@ -61,10 +61,10 @@ class SecondViewController: UIViewController {
     }()
     lazy var btnActionMinus = UIAction { _ in
         if let textFromFirstTextField = self.textField.text, let textFromSecondTextField = self.textField2.text {
-            if let value1 = Int(textFromFirstTextField), let value2 = Int(textFromSecondTextField) {
+            if let value1 = Float(textFromFirstTextField), let value2 = Float(textFromSecondTextField) {
     
                 let res = value1 - value2
-                self.delegate?.setTextAnalise(number1: "\(value1) -", number2: "\(value2)", result: "=\(res)")
+                self.delegate?.setTextAnalise(number1: "\(value1)", number2: "\(value2)", operation: "-", result: "=\(res)")
                 
             }
         }
@@ -78,11 +78,11 @@ class SecondViewController: UIViewController {
     }()
     lazy var btnActionDivision = UIAction { _ in
         if let textFromFirstTextField = self.textField.text, let textFromSecondTextField = self.textField2.text {
-            if let value1 = Int(textFromFirstTextField), let value2 = Int(textFromSecondTextField), value2 != 0 {
+            if let value1 = Float(textFromFirstTextField), let value2 = Float(textFromSecondTextField), value2 != 0 && value2 > 0{
                 let res = value1/value2
-                self.delegate?.setTextAnalise(number1: "\(value1)  /", number2: "\(value2)", result: "=\(res)")
+                self.delegate?.setTextAnalise(number1: "\(value1)", number2: "\(value2)", operation: "/", result: "=\(res)")
             } else {
-            self.delegate?.setTextAnalise(number1: "Error!", number2: " ", result: " ")
+                self.delegate?.setTextAnalise(number1: "Error!", number2: " ", operation: "", result: " ")
                
                 
             }
@@ -97,9 +97,9 @@ class SecondViewController: UIViewController {
     }()
     lazy var btnActionMulti = UIAction { _ in
         if let textFromFirstTextField = self.textField.text, let textFromSecondTextField = self.textField2.text {
-            if let value1 = Int(textFromFirstTextField), let value2 = Int(textFromSecondTextField) {
+            if let value1 = Float(textFromFirstTextField), let value2 = Float(textFromSecondTextField) {
                 let res = value1*value2
-                self.delegate?.setTextAnalise(number1: "\(value1)  *", number2: "\(value2)", result: "=  \(res)")
+                self.delegate?.setTextAnalise(number1: "\(value1)", number2: "\(value2)", operation: "*", result: "=  \(res)")
                 
             }
         }

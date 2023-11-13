@@ -8,23 +8,25 @@
 import UIKit
 //HomeWork2M2
 protocol ViewControllerDelegate {
-    func setTextAnalise(number1: String, number2:String, result: String)
+    func setTextAnalise(number1: String, number2:String, operation: String, result: String)
 }
 
 class ViewController: UIViewController, ViewControllerDelegate {
     
-    func setTextAnalise(number1: String, number2:String, result: String) {
+    func setTextAnalise(number1: String, number2:String, operation: String, result: String) {
         viewLabelNumberOne.text = number1
         viewLabelNumberTwo.text = number2
         viewLabelResult.text = result
+        viewLabelOperation.text = operation
         
     }
-    
     
     lazy var button: UIButton = {
         let btn = UIButton(frame: CGRect(x: 50, y: 400, width: 300, height: 37), primaryAction: UIAction(handler: { _ in
             let vc = SecondViewController()
             vc.delegate = self
+            vc.textField.text = self.viewLabelNumberOne.text
+            vc.textField2.text = self.viewLabelNumberTwo.text
             self.navigationController?.pushViewController(vc, animated: true)
         }))
         
@@ -48,7 +50,6 @@ class ViewController: UIViewController, ViewControllerDelegate {
         labelResult.frame = CGRect(x: 155, y: 200, width: 82, height: 19)
         labelResult.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         labelResult.font = UIFont.boldSystemFont(ofSize: 14)
-        // Line height: 19.36 pt
         labelResult.text = "Результат"
         return labelResult
     }()
@@ -59,8 +60,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
         labelNumberOne.frame = CGRect(x: 40, y: 225, width: 150, height: 40)
         labelNumberOne.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         labelNumberOne.font = UIFont.boldSystemFont(ofSize: 40)
-        // Line height: 19.36 pt
-        labelNumberOne.text = " "
+    
         return labelNumberOne
     }()
     var viewLabelNumberTwo: UILabel = {
@@ -68,7 +68,6 @@ class ViewController: UIViewController, ViewControllerDelegate {
         labelNumberTwo.frame = CGRect(x: 160, y: 225, width: 150, height: 40)
         labelNumberTwo.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         labelNumberTwo.font = UIFont.boldSystemFont(ofSize: 40)
-        labelNumberTwo.text = " "
         return labelNumberTwo
     }()
     var viewLabelResult: UILabel = {
@@ -79,7 +78,14 @@ class ViewController: UIViewController, ViewControllerDelegate {
         labelNumberResult.text = " "
         return labelNumberResult
     }()
- 
+    var viewLabelOperation: UILabel = {
+        let labelNumberOperation = UILabel()
+        labelNumberOperation.frame = CGRect(x: 120, y: 225, width: 150, height: 40)
+        labelNumberOperation.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        labelNumberOperation.font = UIFont.boldSystemFont(ofSize: 40)
+        labelNumberOperation.text = " "
+        return labelNumberOperation
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +96,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
         view.addSubview(viewLabelNumberOne)
         view.addSubview(viewLabelNumberTwo)
         view.addSubview(viewLabelResult)
+        view.addSubview(viewLabelOperation)
         view.addSubview(button)
         
         
